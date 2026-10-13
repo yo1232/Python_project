@@ -8,10 +8,14 @@ def list_files():
     except OSError:
         return OSError 
 
+def file_selector(files):
+    
+    return 0
+
 
 def main():
     files = list_files()
-    #file_selector(files)
+    file_selector(files)
 
     return 0
 
