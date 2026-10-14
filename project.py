@@ -14,11 +14,14 @@ def file_selector(files):
     os.system("clear")
     print("--- File Selector ---")
     print("Available text files: ")
-    print(files)
+    for i in range(len(files)):
+        print(f"{i}: {files[i]}")
     selection = input("Enter file name or number from list above: ")
     for i in files:
-        if selection == i:
-            return selection
+        print(selection)
+        print(i)
+        if selection == i or int(selection) == files.index(i):
+            return files[files.index(i)]
     if i != selection:
         agree = False
         while not agree:
