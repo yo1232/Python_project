@@ -57,6 +57,8 @@ def basic_stats(n_lines, n_words, n_chars_spcs, n_chars_no_spcs):
     print(f"Number of words: {n_words}")
     print(f"Number of characters (with spaces): {n_chars_spcs}")
     print(f"Number of characters (without spaces): {n_chars_no_spcs}")
+    print(f"Average number of words per line: {n_words/n_lines}")
+    print(f"Average characters per word: {n_chars_no_spcs/n_words}")
     while not back:
         answer = int(input("Press 0 to go back: "))
         if answer == 0:
@@ -99,6 +101,5 @@ def main():
             case _:
                 print("Choose one of the options above please :(")
 
-    return 0
 
 main()
