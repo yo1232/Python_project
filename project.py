@@ -41,6 +41,8 @@ def open_basic_stats(file):
     words = []
     n_paragraphs = 0
     n_sentences = 0
+    longest_sentence = ""
+    shortest_sentence = ""
     with open(file, encoding="utf-8") as f:
         for line in f:
             n_lines += 1
@@ -48,12 +50,16 @@ def open_basic_stats(file):
                 n_paragraphs += 1
             if ('.' in line) or ('!' in line) or ('?' in line):
                 n_sentences += 1
+                if len(line) > len(longest_sentence):
+                    longest_sentence = line
+                if len(line) < len(shortest_sentence) or shortest_sentence == "":
+                    shortest_sentence = line
             words.extend(line.split(' '))
             for j in line:
                 n_chars_spcs += 1
                 if j != ' ':
                     n_chars_no_spcs += 1
-    return(n_lines, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences)
+    return(n_lines, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence)
 
 def basic_stats(n_lines, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences):
     back = False
@@ -78,7 +84,6 @@ def basic_stats(n_lines, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragr
     print(f"Number of characters (without spaces): {n_chars_no_spcs}")
     print(f"Average number of words per line: {n_words/n_lines}")
     print(f"Average characters per word: {n_chars_no_spcs/n_words}")
-    print(f"Average words per sentence: {n_words/n_sentences}")
     print(f"Number of unique words: {len(u_words)}")
     print(f"Number of sentences: {n_sentences}")
     while not back:
@@ -115,13 +120,31 @@ def word_analysis(words):
             menu()
             back = True
 
-def sentence_analysis(words):
+def sentence_analysis(words, n_sentences, longest_sentence, shortest_sentence):
     back = False
     os.system("clear")
     print("\n==================================================")
     print("                Sentence Analysis                 ")
     print("==================================================")
-    
+    n_words = 0
+    for i in words:
+        n_words += 1
+    print(f"Number of sentences: {n_sentences}")
+    print(f"Average words per sentence: {n_words/n_sentences}")
+    print(f"Longest sentence: {longest_sentence}, {len(longest_sentence.split())} words")
+    print(f"Shortest sentence: {shortest_sentence}, {len(shortest_sentence.split())} words")
+    print(f"Sentence length distribution (top 5): ")
+    sentence_lengths = []
+    for i in words:
+        if ('.' in i) or ('!' in i) or ('?' in i):
+            sentence_lengths.append(len(i))
+    # Same concept as in word_analysis, finding the most common sentence lengths and their counts
+    # The first one is found by using max with set and count, the rest are found by sorting the set based on count in reverse order
+    print(f"{max(set(sentence_lengths), key=sentence_lengths.count)} words ({sentence_lengths.count(max(set(sentence_lengths), key=sentence_lengths.count))} times)")
+    print(f"{sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[1]} words ({sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[1])} times)")
+    print(f"{sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[2]} words ({sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[2])} times)")
+    print(f"{sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[3]} words ({sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[3])} times)")
+    print(f"{sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[4]} words ({sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[4])} times)")
     while not back:
         answer = int(input("Press 0 to go back: "))
         if answer == 0:
@@ -155,11 +178,13 @@ def main():
             case 1:
                 file = list_files()
                 menu()
-                n_lines, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences = open_basic_stats(file)
+                n_lines, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence = open_basic_stats(file)
             case 2:
                 basic_stats(n_lines, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences)
             case 3:
                 word_analysis(words)
+            case 4:
+                sentence_analysis(words, n_sentences, longest_sentence, shortest_sentence)
             case 7:
                 return 0
             case _:
