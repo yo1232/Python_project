@@ -20,7 +20,7 @@ def file_selector(files):
     for i in files:
         if selection == i:
             return files[files.index(i)]
-        if selection > "0" and selection < "a":
+        if selection >= "0" and selection < "a":
             if int(selection) <= len(files):
                 return files[int(selection)]
     if i != selection:
@@ -89,69 +89,44 @@ def basic_stats(n_lines, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragr
 
 def word_analysis(words):
     back = False
-    t_1 = 0
-    w_1 = ''
-    t_2 = 0
-    w_2 = ''
-    t_3 = 0
-    w_3 = ''
-    t_4 = 0
-    w_4 = ''
-    t_5 = 0
-    w_5 = ''
-    t_6 = 0
-    w_6 = ''
-    t_7 = 0
-    w_7 = ''
-    t_8 = 0
-    w_8 = ''
-    t_9 = 0
-    w_9 = ''
-    t_10 = 0
-    w_10 = ''
+    list_words = []
     os.system("clear")
     print("\n==================================================")
     print("                Word Analysis                     ")
     print("==================================================")
     for i in words:
         if i.isalpha():
-            if words.count(i) > t_1:
-                t_10 = t_9
-                w_10 = w_9
-                t_9 = t_8
-                w_9 = w_8
-                t_8 = t_7
-                w_8 = w_7
-                t_7 = t_6
-                w_7 = w_6
-                t_6 = t_5
-                w_6 = w_5
-                t_5 = t_4
-                w_5 = w_4
-                t_4 = t_3
-                w_4 = w_3
-                t_3 = t_2
-                w_3 = w_2
-                t_2 = t_1
-                w_2 = w_1
-                t_1 = words.count(i)
-                w_1 = i.lower()
-    print(f"Most common word: {w_1} ({t_1} times)")
-    print(f"2nd most common word: {w_2} ({t_2} times)")
-    print(f"3rd most common word: {w_3} ({t_3} times)")
-    print(f"4th most common word: {w_4} ({t_4} times)")
-    print(f"5th most common word: {w_5} ({t_5} times)")
-    print(f"6th most common word: {w_6} ({t_6} times)")
-    print(f"7th most common word: {w_7} ({t_7} times)")
-    print(f"8th most common word: {w_8} ({t_8} times)")
-    print(f"9th most common word: {w_9} ({t_9} times)")
-    print(f"10th most common word: {w_10} ({t_10} times)")
+            list_words.append(i.lower())
+    # Finding the most common words and their counts by using set and count methods
+    # The first one is found by using max with set and count, the rest are found by sorting the set based on count in reverse order
+    print(f"Most common word: {max(set(list_words), key=list_words.count)} ({list_words.count(max(set(list_words), key=list_words.count))} times)")
+    print(f"2nd most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[1]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[1])} times)")
+    print(f"3rd most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[2]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[2])} times)")
+    print(f"4th most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[3]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[3])} times)")
+    print(f"5th most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[4]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[4])} times)")
+    print(f"6th most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[5]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[5])} times)")
+    print(f"7th most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[6]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[6])} times)")
+    print(f"8th most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[7]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[7])} times)")
+    print(f"9th most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[8]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[8])} times)")
+    print(f"10th most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[9]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[9])} times)")
     while not back:
         answer = int(input("Press 0 to go back: "))
         if answer == 0:
             menu()
             back = True
 
+def sentence_analysis(words):
+    back = False
+    os.system("clear")
+    print("\n==================================================")
+    print("                Sentence Analysis                 ")
+    print("==================================================")
+    
+    while not back:
+        answer = int(input("Press 0 to go back: "))
+        if answer == 0:
+            menu()
+            back = True
 
 def menu():
     os.system("clear")
