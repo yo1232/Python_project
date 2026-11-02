@@ -151,6 +151,80 @@ def sentence_analysis(words, n_sentences, longest_sentence, shortest_sentence):
             menu()
             back = True
 
+def character_analysis(words):
+    back = False
+    os.system("clear")
+    print("\n==================================================")
+    print("                Character Analysis                ")
+    print("==================================================")
+    punctuation = 0
+    digits = 0
+    letters = 0
+    for i in words:
+        for j in i:
+            if j.isalpha():
+                letters += 1
+            elif j.isdigit():
+                digits += 1
+            elif not j.isalnum():
+                punctuation += 1
+    print("Character distribution: ")
+    print(f"    Number of letters: {letters}")
+    print(f"    Number of digits: {digits}")
+    print(f"    Number of punctuation marks: {punctuation}")
+    print("Most common letters (top 10): ")
+    letters_list = []
+    for i in words:
+        for j in i:
+            if j.isalpha():
+                letters_list.append(j.lower())
+    # Same concept as in word_analysis, finding the most common letters and their counts
+    # The first one is found by using max with set and count, the rest are found by sorting the set based on count in reverse order
+    print(f"    {max(set(letters_list), key=letters_list.count)} ({letters_list.count(max(set(letters_list), key=letters_list.count))} times)")
+    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[1]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[1])} times)")
+    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[2]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[2])} times)")
+    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[3]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[3])} times)")
+    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[4]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[4])} times)")
+    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[5]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[5])} times)")
+    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[6]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[6])} times)")
+    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[7]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[7])} times)")
+    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[8]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[8])} times)")
+    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[9]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[9])} times)") 
+    while not back:
+        answer = int(input("Press 0 to go back: "))
+        if answer == 0:
+            menu()
+            back = True
+
+def export_results(file):
+    back = False
+    os.system("clear")
+    print("\n==================================================")
+    print("                Export Results                    ")
+    print("==================================================")
+    print("Exporting results to results.txt...")
+    with open(f"{file}_results.txt", "w") as f:
+        f.write("Results of text analysis\n")
+        f.write("========================\n")
+        f.write(f"Number of lines: {n_lines}\n")
+        f.write(f"Number of paragraphs: {n_paragraphs}\n")
+        f.write(f"Number of words: {n_words}\n")
+        f.write(f"Number of characters (with spaces): {n_chars_spcs}\n")
+        f.write(f"Number of characters (without spaces): {n_chars_no_spcs}\n")
+        f.write(f"Average number of words per line: {n_words/n_lines}\n")
+        f.write(f"Average characters per word: {n_chars_no_spcs/n_words}\n")
+        f.write(f"Number of unique words: {len(u_words)}\n")
+        f.write(f"Number of sentences: {n_sentences}\n")
+        f.write(f"Average words per sentence: {n_words/n_sentences}\n")
+        f.write(f"Longest sentence: {longest_sentence}, {len(longest_sentence.split())} words\n")
+        f.write(f"Shortest sentence: {shortest_sentence}, {len(shortest_sentence.split())} words\n")
+    print(f"Results exported to {file}_results.txt successfully!")
+    while not back:
+        answer = int(input("Press 0 to go back: "))
+        if answer == 0:
+            menu()
+            back = True
+
 def menu():
     os.system("clear")
     print("\n==================================================")
@@ -185,6 +259,10 @@ def main():
                 word_analysis(words)
             case 4:
                 sentence_analysis(words, n_sentences, longest_sentence, shortest_sentence)
+            case 5:
+                character_analysis(words)
+            case 6:
+                export_results(file)
             case 7:
                 return 0
             case _:
