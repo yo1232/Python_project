@@ -1,4 +1,4 @@
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import os
 
 def list_files():
@@ -59,7 +59,7 @@ def open_basic_stats(file):
                 n_chars_spcs += 1
                 if j != ' ':
                     n_chars_no_spcs += 1
-        n_words = 0
+    n_words = 0
     b_words = []
     u_words = []
     for j in words:
@@ -71,7 +71,7 @@ def open_basic_stats(file):
             u_words.append(j.lower())
     return(n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence)
 
-def basic_stats(n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence):
+def basic_stats(letters, digits, punctuation, n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence):
     back = False
     os.system("clear")
     print("\n==================================================")
@@ -86,11 +86,20 @@ def basic_stats(n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words,
     print(f"Average characters per word: {n_chars_no_spcs/n_words}")
     print(f"Number of unique words: {len(u_words)}")
     print(f"Number of sentences: {n_sentences}")
+    print("\nPress 0 to go back")
+    print("Press 1 to open the text composition graph")
+    print("Press 2 to open the character type distribution graph")
     while not back:
-        answer = int(input("Press 0 to go back: "))
+        answer = int(input("Select one of the options above: "))
         if answer == 0:
             menu()
             back = True
+        if answer == 1:
+            matplotlib_text_composition(n_lines, u_words, n_paragraphs, n_sentences)
+        if answer == 2:
+            matplotlib_character_distribution(letters, digits, punctuation)
+        else:
+            print("Invalid selection :(")
 
 def word_analysis(words):
     list_words = []
@@ -121,7 +130,7 @@ def word_analysis(words):
     w_l_10 = list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[9])
     return (w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_5, w_6, w_l_6, w_7, w_l_7, w_8, w_l_8, w_9, w_l_9, w_10, w_l_10)
 
-def word_analysis_menu(w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_5, w_6, w_l_6, w_7, w_l_7, w_8, w_l_8, w_9, w_l_9, w_10, w_l_10):
+def word_analysis_menu(w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_5, w_6, w_l_6, w_7, w_l_7, w_8, w_l_8, w_9, w_l_9, w_10, w_l_10, words):
     back = False
     os.system("clear")
     print("\n==================================================")
@@ -138,11 +147,20 @@ def word_analysis_menu(w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_
     print(f"    {w_8} ({w_l_8} times)")
     print(f"    {w_9} ({w_l_9} times)")
     print(f"    {w_10} ({w_l_10} times)")
+    print("\nPress 0 to go back")
+    print("Press 1 to open the top 10 most common words graph")
+    print("Press 2 to open the word length distribution graph")
     while not back:
-        answer = int(input("Press 0 to go back: "))
+        answer = int(input("Press one of the options above: "))
         if answer == 0:
             menu()
             back = True
+        if answer == 1:
+            matplotlib_top10_words(w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_5, w_6, w_l_6, w_7, w_l_7, w_8, w_l_8, w_9, w_l_9, w_10, w_l_10)
+        if answer == 2:
+            matplotlib_word_length_distribution(words)
+        else:
+            print("Invalid selection :(")
 
 def sentence_analysis(words, n_sentences, longest_sentence, shortest_sentence):
     n_words = 0
@@ -164,9 +182,9 @@ def sentence_analysis(words, n_sentences, longest_sentence, shortest_sentence):
     s_l_4 = sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[3])
     s_t_5 = sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[4]
     s_l_5 = sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[4])
-    return (n_sentences, n_words, longest_sentence, shortest_sentence, s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5)
+    return (sentence_lengths, n_sentences, n_words, longest_sentence, shortest_sentence, s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5)
 
-def sentence_analysis_menu(n_words, n_sentences, longest_sentence, shortest_sentence, s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5):
+def sentence_analysis_menu(sentence_lengths, n_words, n_sentences, longest_sentence, shortest_sentence, s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5):
     back = False
     os.system("clear")
     print("\n==================================================")
@@ -182,11 +200,20 @@ def sentence_analysis_menu(n_words, n_sentences, longest_sentence, shortest_sent
     print(f"  {s_t_3} words: {s_l_3} times")
     print(f"  {s_t_4} words: {s_l_4} times")
     print(f"  {s_t_5} words: {s_l_5} times")
+    print("Press 0 to go back")
+    print("Press 1 to open the sentence length distribution graph")
+    print("Press 2 to open the most common sentence lengths graph")
     while not back:
-        answer = int(input("Press 0 to go back: "))
+        answer = int(input("Press one of the options above: "))
         if answer == 0:
             menu()
             back = True
+        if answer == 1:
+            matplotlib_sentence_length_distribution(sentence_lengths)
+        if answer == 2:
+            matplotlib_top5_sentence_lengths(s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5)
+        else:
+            print("Invalid selection :(")
 
 def character_analysis(words):
     punctuation = 0
@@ -251,11 +278,20 @@ def character_analysis_menu(n_words, letters, digits, punctuation, t_1, l_1, t_2
     print(f"    {t_8} ({l_8} times)")
     print(f"    {t_9} ({l_9} times)")
     print(f"    {t_10} ({l_10} times)")
+    print("\nPress 0 to go back")
+    print("Press 1 to open the top 10 most common letters graph")
+    print("Press 2 to open the character type distribution graph")
     while not back:
-        answer = int(input("Press 0 to go back: "))
+        answer = int(input("Press one of the options above: "))
         if answer == 0:
             menu()
             back = True
+        if answer == 1:
+            matplotlib_top10_letters(t_1, l_1, t_2, l_2, t_3, l_3, t_4, l_4, t_5, l_5, t_6, l_6, t_7, l_7, t_8, l_8, t_9, l_9, t_10, l_10)
+        if answer == 2:
+            matplotlib_character_distribution(letters, digits, punctuation)
+        else:
+            print("Invalid selection :(")
 
 def export_results(file, n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence):
     back = False
@@ -286,6 +322,74 @@ def export_results(file, n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs,
             menu()
             back = True
 
+def matplotlib_text_composition(n_lines, u_words, n_paragraphs, n_sentences):
+    x = ['Lines', 'Paragraphs', 'Unique words', 'Sentences']
+    count = [n_lines, n_paragraphs, len(u_words), n_sentences]
+    plt.bar(x, count)
+    plt.title('Text Composition')
+    plt.xlabel('Text Elements')
+    plt.ylabel('Count')
+    plt.show()
+
+def matplotlib_character_distribution(letters, digits, punctuation):
+    x = ['Letters', 'Digits', 'Punctuation']
+    count = [letters, digits, punctuation]
+    plt.pie(count, labels=x, autopct='%1.1f%%', shadow=True, startangle=140, explode=(0.1, 0.1, 0.1))
+    plt.title('Character Distribution')
+    plt.show()
+
+def matplotlib_top10_words(w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_5, w_6, w_l_6, w_7, w_l_7, w_8, w_l_8, w_9, w_l_9, w_10, w_l_10):
+    x = [w_1, w_2, w_3, w_4, w_5, w_6, w_7, w_8, w_9, w_10]
+    count = [w_l_1, w_l_2, w_l_3, w_l_4, w_l_5, w_l_6, w_l_7, w_l_8, w_l_9, w_l_10]
+    plt.bar(x, count)
+    plt.title('Top 10 Most Common Words')
+    plt.xlabel('Words')
+    plt.ylabel('Count')
+    plt.show()
+
+def matplotlib_word_length_distribution(words):
+    x = []
+    for i in words:
+        if i.isalpha():
+            x.append(len(i))
+    count = []
+    for j in x:
+        count.append(x.count(j))
+    plt.bar(x, count)
+    plt.title("Word Length Distribution")
+    plt.xlabel('Word Length (characters)')
+    plt.ylabel('Count')
+    plt.show()
+
+def matplotlib_sentence_length_distribution(sentence_lengths):
+    x = sentence_lengths
+    count = []
+    for j in x:
+        count.append(x.count(j))
+    plt.bar(x, count)
+    plt.title("Sentence Length Distribution")
+    plt.xlabel('Sentence Length (words)')
+    plt.ylabel('Count')
+    plt.show()
+
+def matplotlib_top5_sentence_lengths(s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5):
+    x = [s_t_1, s_t_2, s_t_3, s_t_4, s_t_5]
+    count = [s_l_1, s_l_2, s_l_3, s_l_4, s_l_5]
+    plt.bar(x, count)
+    plt.title("Most Common Sentence Lengths")
+    plt.xlabel('Sentence Length (words)')
+    plt.ylabel('Count')
+    plt.show()
+
+def matplotlib_top10_letters(t_1, l_1, t_2, l_2, t_3, l_3, t_4, l_4, t_5, l_5, t_6, l_6, t_7, l_7, t_8, l_8, t_9, l_9, t_10, l_10):
+    x = [t_1, t_2, t_3, t_4, t_5, t_6, t_7, t_8, t_9, t_10]
+    count = [l_1, l_2, l_3, l_4, l_5, l_6, l_7, l_8, l_9, l_10]
+    plt.bar(x, count)
+    plt.title('Top 10 Most Common Letters')
+    plt.xlabel('Letters')
+    plt.ylabel('Count')
+    plt.show()
+
 def menu():
     os.system("clear")
     print("\n==================================================")
@@ -293,7 +397,7 @@ def menu():
     print("==================================================")
     print("1. Load text file")
     print("2. Display basic statistics")
-    print("3. Word frequency analysis")
+    print("3. Word analysis")
     print("4. Sentence analysis")
     print("5. Character analysis")
     print("6. Export results")
@@ -312,19 +416,19 @@ def main():
         match option:
             case 1:
                 file = list_files()
-                menu()
                 n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence = open_basic_stats(file)
-            case 2:
-                basic_stats(n_lines, n_words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences)
-            case 3:
                 w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_5, w_6, w_l_6, w_7, w_l_7, w_8, w_l_8, w_9, w_l_9, w_10, w_l_10 = word_analysis(words)
-                word_analysis_menu(w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_5, w_6, w_l_6, w_7, w_l_7, w_8, w_l_8, w_9, w_l_9, w_10, w_l_10)
-            case 4:
-                n_sentences, n_words, longest_sentence, shortest_sentence, s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5 = sentence_analysis(words, n_sentences, longest_sentence, shortest_sentence)
-                sentence_analysis_menu(n_words, n_sentences, longest_sentence, shortest_sentence, s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5)
-            case 5:
+                sentence_lengths, n_sentences, n_words, longest_sentence, shortest_sentence, s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5 = sentence_analysis(words, n_sentences, longest_sentence, shortest_sentence)
                 letters, digits, punctuation, t_1, l_1, t_2, l_2, t_3, l_3, t_4, l_4, t_5, l_5, t_6, l_6, t_7, l_7, t_8, l_8, t_9, l_9, t_10, l_10 = character_analysis(words)
-                character_analysis_menu(letters, digits, punctuation, t_1, l_1, t_2, l_2, t_3, l_3, t_4, l_4, t_5, l_5, t_6, l_6, t_7, l_7, t_8, l_8, t_9, l_9, t_10, l_10)
+                menu()
+            case 2:
+                basic_stats(letters, digits, punctuation, n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence)
+            case 3:
+                word_analysis_menu(w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_5, w_6, w_l_6, w_7, w_l_7, w_8, w_l_8, w_9, w_l_9, w_10, w_l_10, words)
+            case 4:
+                sentence_analysis_menu(sentence_lengths, n_words, n_sentences, longest_sentence, shortest_sentence, s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5)
+            case 5:
+                character_analysis_menu(n_words, letters, digits, punctuation, t_1, l_1, t_2, l_2, t_3, l_3, t_4, l_4, t_5, l_5, t_6, l_6, t_7, l_7, t_8, l_8, t_9, l_9, t_10, l_10)
             case 6:
                 export_results(file, n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence)
             case 7:
