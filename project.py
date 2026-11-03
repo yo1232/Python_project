@@ -59,11 +59,7 @@ def open_basic_stats(file):
                 n_chars_spcs += 1
                 if j != ' ':
                     n_chars_no_spcs += 1
-    return(n_lines, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence)
-
-def basic_stats(n_lines, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences):
-    back = False
-    n_words = 0
+        n_words = 0
     b_words = []
     u_words = []
     for j in words:
@@ -73,6 +69,10 @@ def basic_stats(n_lines, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragr
             b_words.append(j.lower())
         if j.lower() not in u_words and j.isalpha() and j.lower() not in b_words:
             u_words.append(j.lower())
+    return(n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence)
+
+def basic_stats(n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence):
+    back = False
     os.system("clear")
     print("\n==================================================")
     print("                 Basic Statistics                 ")
@@ -93,27 +93,51 @@ def basic_stats(n_lines, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragr
             back = True
 
 def word_analysis(words):
-    back = False
     list_words = []
-    os.system("clear")
-    print("\n==================================================")
-    print("                Word Analysis                     ")
-    print("==================================================")
     for i in words:
         if i.isalpha():
             list_words.append(i.lower())
     # Finding the most common words and their counts by using set and count methods
     # The first one is found by using max with set and count, the rest are found by sorting the set based on count in reverse order
-    print(f"Most common word: {max(set(list_words), key=list_words.count)} ({list_words.count(max(set(list_words), key=list_words.count))} times)")
-    print(f"2nd most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[1]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[1])} times)")
-    print(f"3rd most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[2]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[2])} times)")
-    print(f"4th most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[3]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[3])} times)")
-    print(f"5th most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[4]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[4])} times)")
-    print(f"6th most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[5]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[5])} times)")
-    print(f"7th most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[6]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[6])} times)")
-    print(f"8th most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[7]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[7])} times)")
-    print(f"9th most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[8]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[8])} times)")
-    print(f"10th most common word: {sorted(set(list_words), key=list_words.count, reverse=True)[9]} ({list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[9])} times)")
+    w_1 = max(set(list_words), key=list_words.count)
+    w_l_1 = list_words.count(max(set(list_words), key=list_words.count))
+    w_2 = sorted(set(list_words), key=list_words.count, reverse=True)[1]
+    w_l_2 = list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[1])
+    w_3 = sorted(set(list_words), key=list_words.count, reverse=True)[2]
+    w_l_3 = list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[2])
+    w_4 = sorted(set(list_words), key=list_words.count, reverse=True)[3]
+    w_l_4 = list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[3])
+    w_5 = sorted(set(list_words), key=list_words.count, reverse=True)[4]
+    w_l_5 = list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[4])
+    w_6 = sorted(set(list_words), key=list_words.count, reverse=True)[5]
+    w_l_6 = list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[5])
+    w_7 = sorted(set(list_words), key=list_words.count, reverse=True)[6]
+    w_l_7 = list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[6])
+    w_8 = sorted(set(list_words), key=list_words.count, reverse=True)[7]
+    w_l_8 = list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[7])
+    w_9 = sorted(set(list_words), key=list_words.count, reverse=True)[8]
+    w_l_9 = list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[8])
+    w_10 = sorted(set(list_words), key=list_words.count, reverse=True)[9]
+    w_l_10 = list_words.count(sorted(set(list_words), key=list_words.count, reverse=True)[9])
+    return (w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_5, w_6, w_l_6, w_7, w_l_7, w_8, w_l_8, w_9, w_l_9, w_10, w_l_10)
+
+def word_analysis_menu(w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_5, w_6, w_l_6, w_7, w_l_7, w_8, w_l_8, w_9, w_l_9, w_10, w_l_10):
+    back = False
+    os.system("clear")
+    print("\n==================================================")
+    print("                Word Analysis                     ")
+    print("==================================================")
+    print("Most common words (top 10): ")
+    print(f"    {w_1} ({w_l_1} times)")
+    print(f"    {w_2} ({w_l_2} times)")
+    print(f"    {w_3} ({w_l_3} times)")
+    print(f"    {w_4} ({w_l_4} times)")
+    print(f"    {w_5} ({w_l_5} times)")
+    print(f"    {w_6} ({w_l_6} times)")
+    print(f"    {w_7} ({w_l_7} times)")
+    print(f"    {w_8} ({w_l_8} times)")
+    print(f"    {w_9} ({w_l_9} times)")
+    print(f"    {w_10} ({w_l_10} times)")
     while not back:
         answer = int(input("Press 0 to go back: "))
         if answer == 0:
@@ -121,30 +145,43 @@ def word_analysis(words):
             back = True
 
 def sentence_analysis(words, n_sentences, longest_sentence, shortest_sentence):
-    back = False
-    os.system("clear")
-    print("\n==================================================")
-    print("                Sentence Analysis                 ")
-    print("==================================================")
     n_words = 0
     for i in words:
         n_words += 1
-    print(f"Number of sentences: {n_sentences}")
-    print(f"Average words per sentence: {n_words/n_sentences}")
-    print(f"Longest sentence: {longest_sentence}, {len(longest_sentence.split())} words")
-    print(f"Shortest sentence: {shortest_sentence}, {len(shortest_sentence.split())} words")
-    print(f"Sentence length distribution (top 5): ")
     sentence_lengths = []
     for i in words:
         if ('.' in i) or ('!' in i) or ('?' in i):
             sentence_lengths.append(len(i))
     # Same concept as in word_analysis, finding the most common sentence lengths and their counts
     # The first one is found by using max with set and count, the rest are found by sorting the set based on count in reverse order
-    print(f"{max(set(sentence_lengths), key=sentence_lengths.count)} words ({sentence_lengths.count(max(set(sentence_lengths), key=sentence_lengths.count))} times)")
-    print(f"{sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[1]} words ({sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[1])} times)")
-    print(f"{sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[2]} words ({sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[2])} times)")
-    print(f"{sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[3]} words ({sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[3])} times)")
-    print(f"{sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[4]} words ({sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[4])} times)")
+    s_t_1 = max(set(sentence_lengths), key=sentence_lengths.count)
+    s_l_1 = sentence_lengths.count(max(set(sentence_lengths), key=sentence_lengths.count))
+    s_t_2 = sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[1]
+    s_l_2 = sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[1])
+    s_t_3 = sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[2]
+    s_l_3 = sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[2])
+    s_t_4 = sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[3]
+    s_l_4 = sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[3])
+    s_t_5 = sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[4]
+    s_l_5 = sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[4])
+    return (n_sentences, n_words, longest_sentence, shortest_sentence, s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5)
+
+def sentence_analysis_menu(n_words, n_sentences, longest_sentence, shortest_sentence, s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5):
+    back = False
+    os.system("clear")
+    print("\n==================================================")
+    print("                Sentence Analysis                 ")
+    print("==================================================")
+    print(f"Number of sentences: {n_sentences}")
+    print(f"Average words per sentence: {n_words/n_sentences}")
+    print(f"Longest sentence: {longest_sentence}, {len(longest_sentence.split())} words")
+    print(f"Shortest sentence: {shortest_sentence}, {len(shortest_sentence.split())} words")
+    print(f"Sentence length distribution (top 5): ")
+    print(f"  {s_t_1} words: {s_l_1} times")
+    print(f"  {s_t_2} words: {s_l_2} times")
+    print(f"  {s_t_3} words: {s_l_3} times")
+    print(f"  {s_t_4} words: {s_l_4} times")
+    print(f"  {s_t_5} words: {s_l_5} times")
     while not back:
         answer = int(input("Press 0 to go back: "))
         if answer == 0:
@@ -152,11 +189,6 @@ def sentence_analysis(words, n_sentences, longest_sentence, shortest_sentence):
             back = True
 
 def character_analysis(words):
-    back = False
-    os.system("clear")
-    print("\n==================================================")
-    print("                Character Analysis                ")
-    print("==================================================")
     punctuation = 0
     digits = 0
     letters = 0
@@ -168,11 +200,6 @@ def character_analysis(words):
                 digits += 1
             elif not j.isalnum():
                 punctuation += 1
-    print("Character distribution: ")
-    print(f"    Number of letters: {letters}")
-    print(f"    Number of digits: {digits}")
-    print(f"    Number of punctuation marks: {punctuation}")
-    print("Most common letters (top 10): ")
     letters_list = []
     for i in words:
         for j in i:
@@ -180,23 +207,57 @@ def character_analysis(words):
                 letters_list.append(j.lower())
     # Same concept as in word_analysis, finding the most common letters and their counts
     # The first one is found by using max with set and count, the rest are found by sorting the set based on count in reverse order
-    print(f"    {max(set(letters_list), key=letters_list.count)} ({letters_list.count(max(set(letters_list), key=letters_list.count))} times)")
-    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[1]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[1])} times)")
-    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[2]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[2])} times)")
-    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[3]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[3])} times)")
-    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[4]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[4])} times)")
-    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[5]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[5])} times)")
-    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[6]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[6])} times)")
-    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[7]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[7])} times)")
-    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[8]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[8])} times)")
-    print(f"    {sorted(set(letters_list), key=letters_list.count, reverse=True)[9]} ({letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[9])} times)") 
+    t_1 = max(set(letters_list), key=letters_list.count)
+    l_1 = letters_list.count(max(set(letters_list), key=letters_list.count))
+    t_2 = sorted(set(letters_list), key=letters_list.count, reverse=True)[1]
+    l_2 = letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[1])
+    t_3 = sorted(set(letters_list), key=letters_list.count, reverse=True)[2]
+    l_3 = letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[2])
+    t_4 = sorted(set(letters_list), key=letters_list.count, reverse=True)[3]
+    l_4 = letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[3])
+    t_5 = sorted(set(letters_list), key=letters_list.count, reverse=True)[4]
+    l_5 = letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[4])
+    t_6 = sorted(set(letters_list), key=letters_list.count, reverse=True)[5]
+    l_6 = letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[5])
+    t_7 = sorted(set(letters_list), key=letters_list.count, reverse=True)[6]
+    l_7 = letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[6])
+    t_8 = sorted(set(letters_list), key=letters_list.count, reverse=True)[7]
+    l_8 = letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[7])
+    t_9 = sorted(set(letters_list), key=letters_list.count, reverse=True)[8]
+    l_9 = letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[8])
+    t_10 = sorted(set(letters_list), key=letters_list.count, reverse=True)[9]
+    l_10 = letters_list.count(sorted(set(letters_list), key=letters_list.count, reverse=True)[9])
+    return (letters, digits, punctuation, t_1, l_1, t_2, l_2, t_3, l_3, t_4, l_4, t_5, l_5, t_6, l_6, t_7, l_7, t_8, l_8, t_9, l_9, t_10, l_10)
+    
+
+def character_analysis_menu(n_words, letters, digits, punctuation, t_1, l_1, t_2, l_2, t_3, l_3, t_4, l_4, t_5, l_5, t_6, l_6, t_7, l_7, t_8, l_8, t_9, l_9, t_10, l_10):
+    back = False
+    os.system("clear")
+    print("\n==================================================")
+    print("                Character Analysis                ")
+    print("==================================================")
+    print("Character distribution: ")
+    print(f"    Number of letters: {letters}")
+    print(f"    Number of digits: {digits}")
+    print(f"    Number of punctuation marks: {punctuation}")
+    print("Most common letters (top 10): ")
+    print(f"    {t_1} ({l_1} times)")
+    print(f"    {t_2} ({l_2} times)")
+    print(f"    {t_3} ({l_3} times)")
+    print(f"    {t_4} ({l_4} times)")
+    print(f"    {t_5} ({l_5} times)")
+    print(f"    {t_6} ({l_6} times)")
+    print(f"    {t_7} ({l_7} times)")
+    print(f"    {t_8} ({l_8} times)")
+    print(f"    {t_9} ({l_9} times)")
+    print(f"    {t_10} ({l_10} times)")
     while not back:
         answer = int(input("Press 0 to go back: "))
         if answer == 0:
             menu()
             back = True
 
-def export_results(file):
+def export_results(file, n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence):
     back = False
     os.system("clear")
     print("\n==================================================")
@@ -252,17 +313,20 @@ def main():
             case 1:
                 file = list_files()
                 menu()
-                n_lines, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence = open_basic_stats(file)
+                n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence = open_basic_stats(file)
             case 2:
-                basic_stats(n_lines, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences)
+                basic_stats(n_lines, n_words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences)
             case 3:
-                word_analysis(words)
+                w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_5, w_6, w_l_6, w_7, w_l_7, w_8, w_l_8, w_9, w_l_9, w_10, w_l_10 = word_analysis(words)
+                word_analysis_menu(w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_5, w_6, w_l_6, w_7, w_l_7, w_8, w_l_8, w_9, w_l_9, w_10, w_l_10)
             case 4:
-                sentence_analysis(words, n_sentences, longest_sentence, shortest_sentence)
+                n_sentences, n_words, longest_sentence, shortest_sentence, s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5 = sentence_analysis(words, n_sentences, longest_sentence, shortest_sentence)
+                sentence_analysis_menu(n_words, n_sentences, longest_sentence, shortest_sentence, s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5)
             case 5:
-                character_analysis(words)
+                letters, digits, punctuation, t_1, l_1, t_2, l_2, t_3, l_3, t_4, l_4, t_5, l_5, t_6, l_6, t_7, l_7, t_8, l_8, t_9, l_9, t_10, l_10 = character_analysis(words)
+                character_analysis_menu(letters, digits, punctuation, t_1, l_1, t_2, l_2, t_3, l_3, t_4, l_4, t_5, l_5, t_6, l_6, t_7, l_7, t_8, l_8, t_9, l_9, t_10, l_10)
             case 6:
-                export_results(file)
+                export_results(file, n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence)
             case 7:
                 return 0
             case _:
