@@ -44,6 +44,7 @@ def open_basic_stats(file):
     longest_sentence = ""
     shortest_sentence = ""
     with open(file, encoding="utf-8") as f:
+        # Reading the file line by line to avoid memory issues with large files
         for line in f:
             n_lines += 1
             if line == '\n':
@@ -108,6 +109,7 @@ def word_analysis(words):
             list_words.append(i.lower())
     # Finding the most common words and their counts by using set and count methods
     # The first one is found by using max with set and count, the rest are found by sorting the set based on count in reverse order
+    # w_1 is the most common word, w_l_1 is its count, w_2 is the second most common word, w_l_2 is its count, and so on
     w_1 = max(set(list_words), key=list_words.count)
     w_l_1 = list_words.count(max(set(list_words), key=list_words.count))
     w_2 = sorted(set(list_words), key=list_words.count, reverse=True)[1]
@@ -172,6 +174,7 @@ def sentence_analysis(words, n_sentences, longest_sentence, shortest_sentence):
             sentence_lengths.append(len(i))
     # Same concept as in word_analysis, finding the most common sentence lengths and their counts
     # The first one is found by using max with set and count, the rest are found by sorting the set based on count in reverse order
+    # s_t_1 is the most common sentence length, s_l_1 is its count, s_t_2 is the second most common sentence length, s_l_2 is its count, and so on
     s_t_1 = max(set(sentence_lengths), key=sentence_lengths.count)
     s_l_1 = sentence_lengths.count(max(set(sentence_lengths), key=sentence_lengths.count))
     s_t_2 = sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[1]
@@ -234,6 +237,7 @@ def character_analysis(words):
                 letters_list.append(j.lower())
     # Same concept as in word_analysis, finding the most common letters and their counts
     # The first one is found by using max with set and count, the rest are found by sorting the set based on count in reverse order
+    # t_1 is the most common letter, l_1 is its count, t_2 is the second most common letter, l_2 is its count, and so on
     t_1 = max(set(letters_list), key=letters_list.count)
     l_1 = letters_list.count(max(set(letters_list), key=letters_list.count))
     t_2 = sorted(set(letters_list), key=letters_list.count, reverse=True)[1]
