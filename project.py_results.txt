@@ -1,0 +1,16 @@
+Results of text analysis
+========================
+Number of lines: 440
+Number of paragraphs: 22
+Number of words: 4877
+Number of characters (with spaces): 21542
+Number of characters (without spaces): 17105
+Average number of words per line: 11.084090909090909
+Average characters per word: 3.5072790649989747
+Number of unique words: 18
+Number of sentences: 142
+Average words per sentence: 34.34507042253521
+Longest sentence:     s_l_2 = sentence_lengths.count(sorted(set(sentence_lengths), key=sentence_lengths.count, reverse=True)[1])
+, 5 words
+Shortest sentence:     plt.show()
+, 1 words
