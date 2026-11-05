@@ -31,7 +31,7 @@ def file_selector(files):
     return 0
 
 def open_basic_stats(file):
-    print(f"Opening file {file}, please wait...")
+    print(f"Opening file {file}, please wait, this may take a few minutes depending on the file size...")
     n_lines = 0
     n_words = 0
     n_chars_spcs = 0
@@ -46,7 +46,6 @@ def open_basic_stats(file):
     with open(file, encoding="utf-8") as f:
         for line in f:
             n_lines += 1
-            print(f"Reading line {n_lines}...")
             if line == '\n':
                 n_paragraphs += 1
             if ('.' in line) or ('!' in line) or ('?' in line):
