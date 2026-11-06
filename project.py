@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import os
+import os # We import os in order to be able to clear the screen and read the directory
 
 def list_files():
     try:
@@ -10,6 +10,7 @@ def list_files():
     except OSError:
         return OSError 
 
+# If the selection is invalid the function will default to the first book/file on the directory, aka file at index 0
 def file_selector(files):
     os.system("clear")
     print("--- File Selector ---")
@@ -26,7 +27,7 @@ def file_selector(files):
     if i != selection:
         agree = False
         while not agree:
-            print("Invalid selection :(")
+            print("Invalid selection, defaulting to file at index 0")
             agree = input("Write 'True' to continue: ")
     return 0
 
@@ -83,15 +84,15 @@ def basic_stats(letters, digits, punctuation, n_lines, n_words, words, n_chars_s
     print(f"Number of words: {n_words}")
     print(f"Number of characters (with spaces): {n_chars_spcs}")
     print(f"Number of characters (without spaces): {n_chars_no_spcs}")
-    print(f"Average number of words per line: {n_words/n_lines}")
-    print(f"Average characters per word: {n_chars_no_spcs/n_words}")
+    print(f"Average number of words per line: {n_words/n_lines:.2f}")
+    print(f"Average characters per word: {n_chars_no_spcs/n_words:.2f}")
     print(f"Number of unique words: {len(u_words)}")
     print(f"Number of sentences: {n_sentences}")
     print("\nPress 0 to go back")
     print("Press 1 to open the text composition graph")
     print("Press 2 to open the character type distribution graph")
     while not back:
-        answer = int(input("Select one of the options above: "))
+        answer = int(input("Select one of the options above: (0-2)"))
         if answer == 0:
             menu()
             back = True
@@ -153,7 +154,7 @@ def word_analysis_menu(w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_
     print("Press 1 to open the top 10 most common words graph")
     print("Press 2 to open the word length distribution graph")
     while not back:
-        answer = int(input("Press one of the options above: "))
+        answer = int(input("Press one of the options above: (0-2)"))
         if answer == 0:
             menu()
             back = True
@@ -194,7 +195,7 @@ def sentence_analysis_menu(sentence_lengths, n_words, n_sentences, longest_sente
     print("                Sentence Analysis                 ")
     print("==================================================")
     print(f"Number of sentences: {n_sentences}")
-    print(f"Average words per sentence: {n_words/n_sentences}")
+    print(f"Average words per sentence: {n_words/n_sentences:.2f}")
     print(f"Longest sentence: {longest_sentence}, {len(longest_sentence.split())} words")
     print(f"Shortest sentence: {shortest_sentence}, {len(shortest_sentence.split())} words")
     print(f"Sentence length distribution (top 5): ")
@@ -207,7 +208,7 @@ def sentence_analysis_menu(sentence_lengths, n_words, n_sentences, longest_sente
     print("Press 1 to open the sentence length distribution graph")
     print("Press 2 to open the most common sentence lengths graph")
     while not back:
-        answer = int(input("Press one of the options above: "))
+        answer = int(input("Press one of the options above: (0-2)"))
         if answer == 0:
             menu()
             back = True
@@ -286,7 +287,7 @@ def character_analysis_menu(n_words, letters, digits, punctuation, t_1, l_1, t_2
     print("Press 1 to open the top 10 most common letters graph")
     print("Press 2 to open the character type distribution graph")
     while not back:
-        answer = int(input("Press one of the options above: "))
+        answer = int(input("Press one of the options above: (0-2)"))
         if answer == 0:
             menu()
             back = True
@@ -419,6 +420,7 @@ def main():
         option = int(input("Select an option: "))
         match option:
             case 1:
+                # We call all the functions in order to speed up the loading on the rest of the program
                 file = list_files()
                 n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence = open_basic_stats(file)
                 w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_5, w_6, w_l_6, w_7, w_l_7, w_8, w_l_8, w_9, w_l_9, w_10, w_l_10 = word_analysis(words)
@@ -453,7 +455,7 @@ def main():
             case 7:
                 return 0
             case _:
-                print("Choose one of the options above please :(")
+                print("Choose one of the options above please :( (1-7)")
 
 
 main()
