@@ -427,27 +427,27 @@ def main():
                 menu()
             case 2:
                 if file == 0:
-                    print("No file loaded")
+                    print("Please select a file first")
                 else:
                     basic_stats(letters, digits, punctuation, n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence)
             case 3:
                 if file == 0:
-                    print("No file loaded")
+                    print("Please select a file first")
                 else:
                     word_analysis_menu(w_1, w_l_1, w_2, w_l_2, w_3, w_l_3, w_4, w_l_4, w_5, w_l_5, w_6, w_l_6, w_7, w_l_7, w_8, w_l_8, w_9, w_l_9, w_10, w_l_10, words)
             case 4:
                 if file == 0:
-                    print("No file loaded")
+                    print("Please select a file first")
                 else:
                     sentence_analysis_menu(sentence_lengths, n_words, n_sentences, longest_sentence, shortest_sentence, s_t_1, s_l_1, s_t_2, s_l_2, s_t_3, s_l_3, s_t_4, s_l_4, s_t_5, s_l_5)
             case 5:
                 if file == 0:
-                    print("No file loaded")
+                    print("Please select a file first")
                 else:
                     character_analysis_menu(n_words, letters, digits, punctuation, t_1, l_1, t_2, l_2, t_3, l_3, t_4, l_4, t_5, l_5, t_6, l_6, t_7, l_7, t_8, l_8, t_9, l_9, t_10, l_10)
             case 6:
                 if file == 0:
-                    print("No file loaded")
+                    print("Please select a file first")
                 else:
                     export_results(file, n_lines, n_words, words, n_chars_spcs, n_chars_no_spcs, u_words, n_paragraphs, n_sentences, longest_sentence, shortest_sentence)
             case 7:
